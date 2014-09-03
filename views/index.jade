@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    include splash
+        p
+            a.pure-button.pure-button(id="start") Get Started
+    .content-wrapper
+        .content
+            h1.content-head.is-center(id="getStarted", name="start") How To Get Started
+            .pure-g
+                .l-box.pure-u-1.pure-u-med-1-2.pure-u-lrg-1-5
+                .l-box.pure-u-1.pure-u-med-1-2.pure-u-lrg-1-4
+                    h3.content-subhead
+                        i.fa.fa-facebook
+                        | Step 1
+                    a.pure-button.pure-button(href='/auth/facebook') Login With Facebook
+                .l-box.pure-u-1.pure-u-med-1-2.pure-u-lrg-1-4
+                    h3(style="color:grey;").content-subhead
+                        i.fa.fa-mobile
+                        | Step 2
+                    a.pure-button.pure-button-disabled Connect Wristband
+                .l-box.pure-u-1.pure-u-med-1-2.pure-u-lrg-1-4
+                    h3(style="color:grey;").content-subhead
+                        i.fa.fa-check
+                        | Step 3
+                    a.pure-button.pure-button-disabled Connect with Friends
+        //- include ribbon
+        include footer
+
+    script(src='http://yui.yahooapis.com/3.14.1/build/yui/yui.js')
+    //- script
+    //-     YUI().use('node-base', 'node-event-delegate', function (Y) {
+    //-     Y.one('body').delegate('click', function (e) {
+    //-     e.preventDefault();
+    //-     }, 'a[href="#"]');
+    //-     });

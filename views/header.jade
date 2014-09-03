@@ -1,0 +1,18 @@
+.header
+    .home-menu.pure-menu.pure-menu-open.pure-menu-horizontal.pure-menu-fixed
+        - if(user)
+            a.pure-menu-heading(href='/dashboardToday') Welcome, #{user.name}
+        - else
+            a.pure-menu-heading(href='/') ShowerSense
+
+        ul
+            li.pure-menu-selected
+                - if(user)
+                    a(href='/dashboardToday') Home
+                -else
+                    a(href='/') Home
+            li                
+                - if(user) 
+                    a(href='/logout') Log Out
+                - else
+                    a(href='/auth/facebook') Log In                

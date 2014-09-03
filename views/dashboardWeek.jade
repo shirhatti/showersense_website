@@ -1,0 +1,72 @@
+extends dashboardLayout
+
+block content
+    
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          ul.nav.nav-sidebar
+            li#today
+              a(href='/dashboardToday') Today
+            li#yesterday
+              a(href='/dashboardYesterday') Yesterday
+            li.active#week
+              a(href='/dashboardWeek') This Week
+            li#month
+              a(href='/dashboardMonth') Last 30 Days
+
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+            h1.page-header Dashboard
+            .row.placeholders  
+                    .col-xs-6.col-sm-4.placeholder
+                        h3 CYCLE
+                        p#distCycle
+                            |0.0&nbsp;mi
+                        p#durCycle    
+                            |0&nbsp;mins  
+
+                    .col-xs-6.col-sm-4.placeholder
+                        h3 WALK
+                        p#distWalk    
+                            |0.0&nbsp;mi
+                        p#durWalk    
+                            |0&nbsp;mins  
+                    .col-xs-6.col-sm-4.placeholder
+                        h3 RUN
+                        p#distRun 
+                            |0.0&nbsp;mi
+                        p#durRun    
+                            |0&nbsp;mins  
+
+
+            #circles.row.placeholders
+                .col-xs-6.col-sm-4.placeholder
+                    #runCircle
+                        //- #content-walk-bubble-img.bubble.animated.distance.hover-anim
+                        //-     #content-walk-bubble.bubble-taparea
+                .col-xs-6.col-sm-4.placeholder
+                    #walkCircle
+                        //- h5 text
+
+                .col-xs-6.col-sm-4.placeholder
+                    #cycleCircle
+                    .row
+            
+            h1.sub-header LeaderBoard
+            #destination
+            #destination1  
+
+          
+            
+            
+    //- script(src='js/stacked1.js')
+    script(type='text/javascript', src='js/stacked.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/docs.min.js')
+    script(src='js/styles.js')
+    script(src='js/dashboardWeek.js')
+
+
+
+

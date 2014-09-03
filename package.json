@@ -1,29 +1,22 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.0",
-  "description": "A sample Node.js app using Express 4",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "~3.4.x"
-  },
-  "engines": {
-    "node": "0.10.x"
-  },
+  "name": "ShowerSense",
+  "version": "0.0.1",
+  "description": "A Water Conservation Leaderboard",
+  "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": ""
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "author": "Mark Pundsack",
-  "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)"
-  ],
-  "license": "MIT"
+  "author": "Sourabh Shirhatti <shirhatti@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~3.3.4",
+    "jade": "~0.34.1",
+    "mongoose": "~3.8.0",
+    "passport": "~0.1.17",
+    "passport-facebook": "~1.0.1",
+    "fbgraph": "0.2.9",
+    "underscore": "1.3.1",
+    "request": "2.21.x"
+  }
 }
