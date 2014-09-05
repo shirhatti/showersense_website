@@ -124,7 +124,7 @@ app.post('/api/shower', function(req, res){
 });
 
 // port
-app.listen(5000 || process.env.PORT);
+app.listen(process.env.PORT || 5000);
 
 
 // test authentication
