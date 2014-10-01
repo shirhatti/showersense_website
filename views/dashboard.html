@@ -1,67 +1,82 @@
 <html ng-app="dashboard">
 	<head>
 		<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css" />
+		<link href="http://yui.yahooapis.com/pure/0.4.2/pure.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../public/css/dashboard.css" />
+
 
 		<script type='text/javascript' src = '../public/js/jquery.min.js'></script>
 		<script type="text/javascript" src="../public/js/angular.min.js"></script>
 
-		<link href="../public/c3-0.3.0/c3.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="app.js"></script>
+		<link href="../public/c3/c3.css" rel="stylesheet" type="text/css" />
 		<script src="../public/d3/d3.min.js" charset="utf-8"></script>
-		<script src="../public/c3-0.3.0/c3.min.js"></script>
+		<script src="../public/c3/c3.min.js"></script>
+
+		<script type="text/javascript" src="angular-dashboard.js"></script>
 
 	</head>
 
 	<body>
-		<section class="tab" ng-controller="TabController as panel">
-			<ul class="nav nav-pills">
-				<li ng-class="{ active: panel.isSet(1)}">
-					<a href ng-click="panel.setTab(1)">Today</a></li>
-				<li ng-class="{ active: panel.isSet(2)}">
-					<a href ng-click="panel.setTab(2)">Yesterday</a></li>
-				<li ng-class="{ active: panel.isSet(3)}">
-					<a href ng-click="panel.setTab(3)">Week</a></li>
-				<li ng-class="{ active: panel.isSet(4)}">
-					<a href ng-click="panel.setTab(4)">Month</a></li>
-			</ul>
+	<div class="pure-g">
+		<div class="pure-u-1-4">
+		</div>
+		<div class="pure-u-2-3">
+			
+			<section ng-controller="TabController as panel">
+					<div class="pure-g">
+					<div class="pure-u-2-3"><h3>Your Water Usage For {{panel.period}}</h3></div>
+					<div class="pure-u-1-3"><h3>{{panel.usagetotal}}</h3></div>
+					</div>
+					<!-- CHART -->
+					<div id="chart">
+				    	<script>
+					    	var chart = c3.generate({
+							    data: {json:{}}
+							});
+			 		   	</script>
+			    	</div>
 
-			<!-- decide whether or not to use ng-if instead of ng-show 
-			http://stackoverflow.com/questions/21869283/when-to-favor-ng-if-vs-ng-show-ng-hide
-			-->
-			<div ng-show="panel.isSet(1)">
-		    	<h4>Today</h4>
-		    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-		    	<p>Today's stats go here</p>
-		    	<div id="chart">
-		    	<script>
-		    	var chart = c3.generate({
-				    data: {
-				        json: {
-				            data1: [30, 20, 50, 40, 60, 50],
-				            data2: [200, 130, 90, 240, 130, 220],
-				            data3: [300, 200, 160, 400, 250, 250]
-				        	}
-				    	}
-					});
-		    	</script>
-		    	</div>
-		    </div>
-		    <div ng-show="panel.isSet(2)">
-		    	<h4>Yesterday</h4>
-		    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-		    	<p>Yesterday's stats go here</p>
-		    </div>
-		    <div ng-show="panel.isSet(3)">
-		    	<h4>Week</h4>
-		    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-		    	<p>This week's stats go here</p>
-		    </div>
-		    <div ng-show="panel.isSet(4)">
-		    	<h4>Month</h4>
-		    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-		    	<p>This month's stats go here</p>
-		    </div>
-		</section>
+			    	<!-- TABS -->
+			
+					<ul class="nav nav-pills">
+						<li ng-class="{ active: panel.isSet(1)}">
+							<a href ng-click="panel.setTab(1)">Today</a></li>
+						<li ng-class="{ active: panel.isSet(2)}">
+							<a href ng-click="panel.setTab(2)">Yesterday</a></li>
+						<li ng-class="{ active: panel.isSet(3)}">
+							<a href ng-click="panel.setTab(3)">Week</a></li>
+						<li ng-class="{ active: panel.isSet(4)}">
+							<a href ng-click="panel.setTab(4)">Month</a></li>
+					</ul>
+
+				<!-- decide whether or not to use ng-if instead of ng-show 
+				http://stackoverflow.com/questions/21869283/when-to-favor-ng-if-vs-ng-show-ng-hide
+				-->
+				<div ng-show="panel.isSet(1)">
+			    	<h4>Today</h4>
+			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
+			    	<p>Today's stats go here</p>
+
+			    </div>
+			    <div ng-show="panel.isSet(2)">
+			    	<h4>Yesterday</h4>
+			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
+			    	<p>Yesterday's stats go here</p>
+			    </div>
+			    <div ng-show="panel.isSet(3)">
+			    	<h4>Week</h4>
+			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
+			    	<p>This week's stats go here</p>
+			    </div>
+			    <div ng-show="panel.isSet(4)">
+			    	<h4>Month</h4>
+			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
+			    	<p>This month's stats go here</p>
+			    </div>
+			</section>
+			
+	    </div>
+   	</div>
 
 	</body>
 </html>

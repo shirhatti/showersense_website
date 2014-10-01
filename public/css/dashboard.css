@@ -96,3 +96,12 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.nav-pills {
+  text-align:center;
+}
+.nav-pills > li {
+  float:none;
+  display:inline-block;
+
+}
