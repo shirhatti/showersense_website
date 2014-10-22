@@ -1,124 +1,128 @@
 <html ng-app="dashboard">
-	<head>
-		<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css" />
-		<link href="http://yui.yahooapis.com/pure/0.4.2/pure.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="../public/css/dashboard.css" />
+<head>
+	<link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css" />
+	<link href="http://yui.yahooapis.com/pure/0.4.2/pure.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="../public/css/dashboard.css" />
 
 
-		<script type='text/javascript' src = '../public/js/jquery.min.js'></script>
-		<script type="text/javascript" src="../public/js/angular.min.js"></script>
+	<script type='text/javascript' src = '../public/js/jquery.min.js'></script>
+	<script type="text/javascript" src="../public/js/angular.min.js"></script>
 
-		<link href="../public/c3/c3.css" rel="stylesheet" type="text/css" />
-		<script src="../public/d3/d3.min.js" charset="utf-8"></script>
-		<script src="../public/c3/c3.min.js"></script>
+	<link href="../public/c3/c3.css" rel="stylesheet" type="text/css" />
+	<script src="../public/d3/d3.min.js" charset="utf-8"></script>
+	<script src="../public/c3/c3.min.js"></script>
 
-		<script type="text/javascript" src="angular-dashboard.js"></script>
+	<script type="text/javascript" src="angular-dashboard.js"></script>
 
-	</head>
+</head>
+
+<body>
 
 	<div class="header">
-	  <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+		<div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
 			<a href="/" class="pure-menu-heading">ShowerSense</a>
-	    <ul>
-	      <li class="pure-menu-selected"><a href="/">Home</a></li>
-	      <li><a href="/auth/facebook">Log In</a></li>
-	    </ul>
-	  </div>
+			<ul>
+				<li class="pure-menu-selected"><a href="/">Home</a></li>
+				<li><a href="/auth/facebook">Log In</a></li>
+			</ul>
+		</div>
 	</div>
 
-	<body>
-
-	<div class="pure-g">
-		<div class="pure-u-1-4">
+	<div class="container-fluid"
+	<div class="row">
+		<div class="col-md-4">
 			<div class="panel panel-default">
-					<div class="panel-heading">
-						<h2 class="panel-title">Personal Stats</h2>
-					</div>
-					<p>Stuff goes here</p>
-			</div>
-			<div class="panel panel-default">
-					<div class="panel-heading">
-						<h2 class="panel-title">Another Panel</h2>
-					</div>
-					<p>Stuff goes here</p>
-			</div>
-		</div>
-		<div class="pure-u-2-3">
-			<div class="panel panel-default">
-
-			<section ng-controller="TabController as panel">
 				<div class="panel-heading">
-					<h2 class="panel-title">Your Water Usage For {{panel.period}}</h2>
-				</div>
-					{{panel.usagetotal}}
-					<!-- CHART -->
-					<div id="chart">
-				    	<script>
-					    	var chart = c3.generate({
-							    data: {
-							    	json:{},
-							    	type:'bar'
+					<h2 class="panel-title">Personal Stats</h2>
+				</div> <!-- end panel-heading -->
+				<div class="panel-body">
+					<p>Last shower water usage</p>
+				</div> <!-- end panel-body -->
+			</div> <!-- end panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">Another Panel</h2>
+				</div> <!-- end panel-heading -->
+				<div class="panel-body">
+					<p>Stuff goes here</p>
+				</div> <!-- end panel-body -->
+			</div> <!-- end panel -->
+		</div> <!-- end col-md-4 column -->
+		<div class="col-md-8">
+			<section ng-controller="TabController as panel">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title">Your Water Usage For {{panel.period}}</h2>
+					</div> <!-- end panel-heading -->
+					<div class="panel-body">
+						{{panel.usagetotal}}
+						<!-- CHART -->
+						<div id="usageChart">
+						<script>
+						var usageChart = c3.generate({
+							bindto: '#usageChart',
+							data: {
+								json:{},
+								type:'line'
+							},
+							axis: {
+								x: {
+									label: 'Day'
 								},
-								axis:{rotated:'true'}
-							});
-			 		   	</script>
-			    	</div>
+								y: {
+									label: 'Gallons'
+								}
+							}
+						});
+						</script>
+					</div>
 
-			    	<!-- TABS -->
+					<!-- TABS -->
 
 					<ul class="nav nav-pills">
 						<li ng-class="{ active: panel.isSet(1)}">
-							<a href ng-click="panel.setTab(1)">Today</a></li>
+							<a href ng-click="panel.setTab(1)">Week</a>
+						</li>
 						<li ng-class="{ active: panel.isSet(2)}">
-							<a href ng-click="panel.setTab(2)">Yesterday</a></li>
-						<li ng-class="{ active: panel.isSet(3)}">
-							<a href ng-click="panel.setTab(3)">Week</a></li>
-						<li ng-class="{ active: panel.isSet(4)}">
-							<a href ng-click="panel.setTab(4)">Month</a></li>
+							<a href ng-click="panel.setTab(2)">Month</a>
+						</li>
 					</ul>
 
-				<!-- decide whether or not to use ng-if instead of ng-show
-				http://stackoverflow.com/questions/21869283/when-to-favor-ng-if-vs-ng-show-ng-hide
+					<!-- decide whether or not to use ng-if instead of ng-show
+					http://stackoverflow.com/questions/21869283/when-to-favor-ng-if-vs-ng-show-ng-hide
 				-->
-				<div ng-show="panel.isSet(1)">
-			    	<h4>Today</h4>
-			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-			    	<p>Today's stats go here</p>
+			</div> <!-- end panel-body -->
 
-			    </div>
-			    <div ng-show="panel.isSet(2)">
-			    	<h4>Yesterday</h4>
-			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-			    	<p>Yesterday's stats go here</p>
-			    </div>
-			    <div ng-show="panel.isSet(3)">
-			    	<h4>Week</h4>
-			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-			    	<p>This week's stats go here</p>
-			    </div>
-			    <div ng-show="panel.isSet(4)">
-			    	<h4>Month</h4>
-			    	<!--<blockquote>DISPLAY DATA HERE</blockquote>-->
-			    	<p>This month's stats go here</p>
-			    </div>
-			</section>
-		</div>
-		</div>
-   	</div>
-   	<div class="pure-g">
-	   		<div class="pure-u-1-3">
+		</div> <!-- end usageChart panel -->
+	</section>
 
- 				</div>
-	   		<div class="pure-u-2-3">
-				<div id="chartSecond">
-				    <script>
-					 //   	var chartSecond = c3.generate({
-						// 	data: {json:{}}
-						// });
-			 		</script>
-			    </div>
-	   		</div>
-   	</div>
+	<section ng-controller="LeaderboardController as panel">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2 class="panel-title">LeaderBoard</h2>
+		</div> <!-- end leaderboard panel-heading -->
+		<div class="panel-body">
+			<div id="leaderChart">
+				<script>
+				var leaderboard = c3.generate({
+					bindto: '#leaderChart',
+					data: {
+						json:{},
+						type:'bar'
+					},
+					axis:{
+						rotated:'true',
 
-	</body>
+						}
+				});
+				</script>
+			</div>
+		</div> <!-- end leaderboard panel-body -->
+	</div> <!-- end leaderboard panel -->
+	</section>
+</div> <!-- end col-md-8 column -->
+</div> <!-- end Row -->
+</div> <!-- end Container -->
+
+</body>
 </html>
