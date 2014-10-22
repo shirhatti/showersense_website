@@ -16,18 +16,41 @@
 
 	</head>
 
+	<div class="header">
+	  <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+			<a href="/" class="pure-menu-heading">ShowerSense</a>
+	    <ul>
+	      <li class="pure-menu-selected"><a href="/">Home</a></li>
+	      <li><a href="/auth/facebook">Log In</a></li>
+	    </ul>
+	  </div>
+	</div>
+
 	<body>
+
 	<div class="pure-g">
 		<div class="pure-u-1-4">
-		<p>Personal Stats Go HERE</p>
+			<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title">Personal Stats</h2>
+					</div>
+					<p>Stuff goes here</p>
+			</div>
+			<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title">Another Panel</h2>
+					</div>
+					<p>Stuff goes here</p>
+			</div>
 		</div>
 		<div class="pure-u-2-3">
-			
+			<div class="panel panel-default">
+
 			<section ng-controller="TabController as panel">
-					<div class="pure-g">
-					<div class="pure-u-2-3"><h3>Your Water Usage For {{panel.period}}</h3></div>
-					<div class="pure-u-1-3"><h3>{{panel.usagetotal}}</h3></div>
-					</div>
+				<div class="panel-heading">
+					<h2 class="panel-title">Your Water Usage For {{panel.period}}</h2>
+				</div>
+					{{panel.usagetotal}}
 					<!-- CHART -->
 					<div id="chart">
 				    	<script>
@@ -42,7 +65,7 @@
 			    	</div>
 
 			    	<!-- TABS -->
-			
+
 					<ul class="nav nav-pills">
 						<li ng-class="{ active: panel.isSet(1)}">
 							<a href ng-click="panel.setTab(1)">Today</a></li>
@@ -54,7 +77,7 @@
 							<a href ng-click="panel.setTab(4)">Month</a></li>
 					</ul>
 
-				<!-- decide whether or not to use ng-if instead of ng-show 
+				<!-- decide whether or not to use ng-if instead of ng-show
 				http://stackoverflow.com/questions/21869283/when-to-favor-ng-if-vs-ng-show-ng-hide
 				-->
 				<div ng-show="panel.isSet(1)">
@@ -80,9 +103,12 @@
 			    </div>
 			</section>
 		</div>
+		</div>
    	</div>
    	<div class="pure-g">
-	   		<div class="pure-u-1-3"> <p>HI THERE</p> </div>
+	   		<div class="pure-u-1-3">
+
+ 				</div>
 	   		<div class="pure-u-2-3">
 				<div id="chartSecond">
 				    <script>

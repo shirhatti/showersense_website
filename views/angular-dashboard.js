@@ -6,7 +6,7 @@
 		//this.data = some mongo query
 	});
 
-	app.controller('TabController', function($http){		
+	app.controller('TabController', function($http){
 		this.setTab = function(num){
 			this.tab = num;
 			var url;
@@ -65,6 +65,6 @@
 			});
 		};
 	});
-	
-	
+
+
 })();
