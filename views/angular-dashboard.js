@@ -64,8 +64,6 @@
 		this.initialize = function(){
 			var url = 'http://demo7576728.mockable.io/leaderboard';
 			$http.get(url).success(loadData);
-
-
 		};
 
 		loadData = function(data){

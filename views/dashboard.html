@@ -31,6 +31,8 @@
 	<div class="container-fluid"
 	<div class="row">
 		<div class="col-md-4">
+			
+			<!-- Personal Stats Panel-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2 class="panel-title">Personal Stats</h2>
@@ -38,15 +40,30 @@
 				<div class="panel-body">
 					<p>Last shower water usage</p>
 				</div> <!-- end panel-body -->
-			</div> <!-- end panel -->
+			</div> <!-- End Personal Stats Panel -->
+			
+			<!-- Add Remove Friends Panel-->	
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h2 class="panel-title">Another Panel</h2>
+					<h2 class="panel-title">Edit Friend List</h2>
 				</div> <!-- end panel-heading -->
-				<div class="panel-body">
-					<p>Stuff goes here</p>
+				<div class="panel-body" ng-controller="LeaderboardController as addRemove">
+					<form class="form-horizontal col-sm-12" role="form">
+						<div class="form-group">
+					    	<input type="text" class="form-control" id="friend" placeholder="Friend's Name">
+						</div>
+					  	<div class="form-group text-center">
+					  		<div class="col-sm-6">
+					    		<button ng-click="addRemove.addFriend()" class="btn btn-success btn-block">Add</button>
+					    	</div>
+					    	<div class="col-sm-6">
+					    		<button ng-click="addRemove.removeFriend()" class="btn btn-danger btn-block">Remove</button>
+					    	</div>
+						</div>
+					</form>
 				</div> <!-- end panel-body -->
-			</div> <!-- end panel -->
+			</div> <!-- End Add Remove Friends Panel -->
+		
 		</div> <!-- end col-md-4 column -->
 		<div class="col-md-8">
 			<section ng-controller="TabController as panel">
