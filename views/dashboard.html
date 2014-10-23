@@ -30,15 +30,20 @@
 
 	<div class="container-fluid"
 	<div class="row">
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2 class="panel-title">Personal Stats</h2>
-				</div> <!-- end panel-heading -->
-				<div class="panel-body">
-					<p>Last shower water usage</p>
-				</div> <!-- end panel-body -->
-			</div> <!-- end panel -->
+		<div class="col-sm-4">
+			<section ng-controller="PersonalController as personal">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2 class="panel-title">Personal Stats</h2>
+					</div> <!-- end panel-heading -->
+					<div class="panel-body">
+						<p>Last shower water usage: {{personal.lastusage}}</p>
+						<p>Last shower duration: {{personal.lastduration}}</p>
+						<p>Joined: {{personal.datejoined}}</p>
+						<p>Number of showers: {{personal.numshowers}}</p>
+					</div> <!-- end panel-body -->
+				</div> <!-- end panel -->
+			</section>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2 class="panel-title">Another Panel</h2>
@@ -48,7 +53,7 @@
 				</div> <!-- end panel-body -->
 			</div> <!-- end panel -->
 		</div> <!-- end col-md-4 column -->
-		<div class="col-md-8">
+		<div class="col-sm-8">
 			<section ng-controller="TabController as panel">
 				<div class="panel panel-default">
 					<div class="panel-heading">
