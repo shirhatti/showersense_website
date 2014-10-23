@@ -32,10 +32,7 @@
 		};
 
 		this.init();
-
 	}]);
-
-
 
 	app.controller('TabController', function($http, $scope){
 		this.setTab = function(num){
@@ -46,64 +43,57 @@
 					this.period = "this week";
 					url = 'http://demo7576728.mockable.io/week1';
 					break;
-					case 2:
-						this.period = "this month";
-						url = 'http://demo7576728.mockable.io/month1';
-						break;
-					}
+				case 2:
+					this.period = "this month";
+					url = 'http://demo7576728.mockable.io/month1';
+					break;
+			}
 
-					$scope.usage;
-					$http.get(url).success(function(data){
-						usageChart.load({
-							json: data.values
-						});
-						$scope.usage = data.total;
-					});
-					this.usagetotal = $scope.usage;
-					// $http.get(url).success(loadUsage);
-
-				};	//end of setTab function
-
-				this.isSet = function(num){
-					return (this.tab == num);
-				};
-
-				//Refresh chart with new data
-				loadUsage = function(data){
-					usageChart.load({
-						json: data.values
-					});
-					$scope.usage = data.total;
-				};
-
-				//Initialize page to first tab (Today)
-				this.setTab(1);
+			$scope.usage;
+			$http.get(url).success(function(data){
+				usageChart.load({
+					json: data.values
+				});
+				$scope.usage = data.total;
 			});
+			this.usagetotal = $scope.usage;
+			// $http.get(url).success(loadUsage);
 
-			app.controller('LeaderboardController', function($http){
-				this.addFriend = function(){
-					$http.get(url).success(loadData);
-				}
-				this.removeFriend = function(){
-					$http.get(url).success(loadData);
-				}
+		};	//end of setTab function
 
-				this.initialize = function(){
-					var url = 'http://demo7576728.mockable.io/leaderboard';
-					$http.get(url).success(loadData);
+		this.isSet = function(num){
+			return (this.tab == num);
+		};
 
-
-				};
-
-				loadData = function(data){
-					leaderboard.load({
-						json: data.values
-					});
-				};
-
-				this.initialize();
-
+		//Refresh chart with new data
+		loadUsage = function(data){
+			usageChart.load({
+				json: data.values
 			});
+			$scope.usage = data.total;
+		};
 
+		//Initialize page to first tab (Today)
+		this.setTab(1);
+	});
 
-		})();
+	app.controller('LeaderboardController', function($http){
+		this.addFriend = function(){
+			$http.get(url).success(loadData);
+		}
+		this.removeFriend = function(){
+			$http.get(url).success(loadData);
+		}
+		this.initialize = function(){
+			var url = 'http://demo7576728.mockable.io/leaderboard';
+			$http.get(url).success(loadData);
+		};
+		loadData = function(data){
+			leaderboard.load({
+				json: data.values
+			});
+		};
+		this.initialize();
+	});
+
+})();
