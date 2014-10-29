@@ -2,13 +2,18 @@ html(ng-app='dashboard')
 head
     link(rel='stylesheet', type='text/css', href='css/bootstrap.min.css')
     link(href='http://yui.yahooapis.com/pure/0.4.2/pure.css', rel='stylesheet', type='text/css')
-    link(rel='stylesheet', type='text/css', href='css/dashboard.css')
     link(rel='stylesheet', href='css/layouts/marketing.css')
-    script(type='text/javascript', src='js/jquery.min.js')
-    script(type='text/javascript', src='js/angular.min.js')
     link(href='c3/c3.css', rel='stylesheet', type='text/css')
+
+
+    script(type='text/javascript', src='js/jquery.min.js')
+    script(type='text/javascript', src = 'js/bootstrap.min.js') 
+    script(type='text/javascript', src='js/angular.min.js')
+    
     script(src='d3/d3.min.js', charset='utf-8')
     script(src='c3/c3.min.js')
+
+    link(rel='stylesheet', type='text/css', href='css/dashboard.css')
     script(type='text/javascript', src='js/angular-dashboard.js')
 
   body
@@ -41,7 +46,9 @@ head
             .panel-body(ng-controller='LeaderboardController as addRemove')
               form.form-horizontal.col-sm-12(role='form')
                 .form-group
-                  input#friend.form-control(type='text', placeholder='Friend\'s Name')
+                  input.form-control.typeahead(id='name', type='text', placeholder='Find a Friend', data-provide='typeahead')
+                  p
+                  //input#friend.form-control(type='text', placeholder='Friend\'s Name').typeahead
                 .form-group.text-center
                   .col-sm-6
                     button.btn.btn-success.btn-block(ng-click='addRemove.addFriend()') Add
@@ -72,3 +79,6 @@ head
                 #leaderChart
                   script(type='text/javascript', src='js/leaderchartinit.js')
   include footer
+  script(src='http://yui.yahooapis.com/3.14.1/build/yui/yui.js')
+  script(type='text/javascript', src = 'js/invite.js')
+
