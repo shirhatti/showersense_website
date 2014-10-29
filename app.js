@@ -48,10 +48,7 @@ passport.deserializeUser(function(id, done) {
 
 // routes
 app.get('/', routes.index);
-app.get('/dashboardToday', routes.dashboardToday);
-app.get('/dashboardYesterday', routes.dashboardYesterday);
-app.get('/dashboardWeek', routes.dashboardWeek);
-app.get('/dashboardMonth', routes.dashboardMonth);
+app.get('/dashboard', routes.dashboard);
 app.get('/invite', routes.invite);
 app.get('/friends', routes.friends);
 app.get('/account', ensureAuthenticated, function(req, res){
