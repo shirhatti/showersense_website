@@ -34,7 +34,7 @@ module.exports = passport.use(new FacebookStrategy({
         created: Date.now(),
         accessToken: accessToken,
         refreshToken: refreshToken,
-        wristbandId: null
+        wristbandId: null //TODO: find out how to display this
 
       });
       user.save(function(err) {

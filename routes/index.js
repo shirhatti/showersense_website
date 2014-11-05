@@ -14,44 +14,14 @@ exports.stacked1 = function(req, res){
     res.render("stacked1");
 };
 
-exports.dashboardToday = function(req, res){
+exports.dashboard = function(req, res){
   User.findById(req.session.passport.user, function(err, userzz) {
       if(err) { 
         console.log(err);
       } else {
-        res.render("dashboardToday", {user: userzz});
+        res.render("dashboard", {user: userzz});
       }
     })
-};
-
-exports.dashboardYesterday = function(req, res){
-  User.findById(req.session.passport.user, function(err, userzz) {
-    if(err) { 
-      console.log(err);
-    } else {
-      res.render("dashboardYesterday", {user: userzz});
-    }
-  })
-};
-
-exports.dashboardWeek = function(req, res){
-  User.findById(req.session.passport.user, function(err, userzz) {
-    if(err) { 
-      console.log(err);
-    } else {
-      res.render("dashboardWeek", {user: userzz});
-    }
-  })
-};
-
-exports.dashboardMonth = function(req, res){
-  User.findById(req.session.passport.user, function(err, userzz) {
-    if(err) { 
-      console.log(err);
-    } else {
-      res.render("dashboardMonth", {user: userzz});
-    }
-  })
 };
 
 exports.invite = function(req, res){

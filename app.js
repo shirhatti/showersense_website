@@ -48,10 +48,7 @@ passport.deserializeUser(function(id, done) {
 
 // routes
 app.get('/', routes.index);
-app.get('/dashboardToday', routes.dashboardToday);
-app.get('/dashboardYesterday', routes.dashboardYesterday);
-app.get('/dashboardWeek', routes.dashboardWeek);
-app.get('/dashboardMonth', routes.dashboardMonth);
+app.get('/dashboard', routes.dashboard);
 app.get('/invite', routes.invite);
 app.get('/friends', routes.friends);
 app.get('/account', ensureAuthenticated, function(req, res){
@@ -99,9 +96,27 @@ app.get('/api/friends', function(req, res){
       fb_logged_in = true;
       query = "SELECT uid,username,name, is_app_user FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user=1"
       graph.fql(query, function(err, res2) {
-      res.send(res2);
-    });
+        res.send(res2);
+      });
     }
+  });
+});
+
+app.get('/api/getwristband', function(req,res){
+  User.findById(req.session.passport.user, function(err, userzz) {
+    if (err) {
+      //TODO: provide error message
+      console.log(err);
+      res.send('error', 401);
+    } 
+    if ( !err && userzz != null ){
+      console.log(userzz.name);
+      res.send(userzz.wristbandId);
+    } else {
+    console.log('noo');
+    res.send('nothing happened');
+  }
+
   });
 });
 
