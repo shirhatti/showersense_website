@@ -23,7 +23,7 @@
 			stat.getStats(function(response){
 				$scope.profile = response;
 				// console.log('$scope.profile = ' +Object.keys($scope.profile))
-				console.log(response); //successfully got response here, TODO: BUT HOW TO USE IT
+				//console.log(response); //successfully got response here, TODO: BUT HOW TO USE IT
 			});
 			// this.lastusage = $scope.profile.lastShowerUsage;
 			// this.lastduration = data.lastShowerDuration;
