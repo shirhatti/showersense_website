@@ -96,9 +96,27 @@ app.get('/api/friends', function(req, res){
       fb_logged_in = true;
       query = "SELECT uid,username,name, is_app_user FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user=1"
       graph.fql(query, function(err, res2) {
-      res.send(res2);
-    });
+        res.send(res2);
+      });
     }
+  });
+});
+
+app.get('/api/getwristband', function(req,res){
+  User.findById(req.session.passport.user, function(err, userzz) {
+    if (err) {
+      //TODO: provide error message
+      console.log(err);
+      res.send('error', 401);
+    } 
+    if ( !err && userzz != null ){
+      console.log(userzz.name);
+      res.send(userzz.wristbandId);
+    } else {
+    console.log('noo');
+    res.send('nothing happened');
+  }
+
   });
 });
 
@@ -121,7 +139,7 @@ app.post('/api/shower', function(req, res){
 });
 
 // port
-app.listen(5000 || process.env.PORT);
+app.listen(process.env.PORT || 5000);
 
 
 // test authentication

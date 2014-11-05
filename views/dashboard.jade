@@ -35,7 +35,7 @@ head
             .panel-body(ng-controller='LeaderboardController as addRemove')
               form.form-horizontal.col-sm-12(role='form')
                 .form-group
-                  input#friend.form-control(type='text', placeholder='Friend\'s Name')
+                   input.form-control.typeahead(id='name', type='text', placeholder='Find a Friend', data-provide='typeahead')
                 .form-group.text-center
                   .col-sm-6
                     button.btn.btn-success.btn-block(ng-click='addRemove.addFriend()') Add
