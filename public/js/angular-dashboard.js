@@ -5,7 +5,7 @@
 		this.getStats = function(callback){
 			var url = 'http://demo7576728.mockable.io/personal';
 			$http.get(url).success(function(response){
-				console.log('base response = ' +response);
+				//console.log('base response = ' +response);
 				callback(response);
 			})
 		}
@@ -23,7 +23,7 @@
 			stat.getStats(function(response){
 				$scope.profile = response;
 				// console.log('$scope.profile = ' +Object.keys($scope.profile))
-				//console.log(response); //successfully got response here, TODO: BUT HOW TO USE IT
+				console.log(response); //successfully got response here, TODO: BUT HOW TO USE IT
 			});
 			// this.lastusage = $scope.profile.lastShowerUsage;
 			// this.lastduration = data.lastShowerDuration;
@@ -57,7 +57,7 @@
 				$scope.usage = data.total;
 			});
 			this.usagetotal = $scope.usage;
-			// $http.get(url).success(loadUsage);
+						// $http.get(url).success(loadUsage);
 
 		};	//end of setTab function
 
@@ -80,10 +80,10 @@
 	app.controller('LeaderboardController', function($http){
 		this.addFriend = function(){
 			$http.get(url).success(loadData);
-		}
+		};
 		this.removeFriend = function(){
 			$http.get(url).success(loadData);
-		}
+		};
 		this.initialize = function(){
 			var url = 'http://demo7576728.mockable.io/leaderboard';
 			$http.get(url).success(loadData);
@@ -94,6 +94,22 @@
 			});
 		};
 		this.initialize();
+	});
+
+	app.controller('WristbandController', function($http, $scope){
+		$scope.wristband;
+		this.init = function(){
+			$http.get('../api/wristband').success(saveWristband);
+			//$scope.$apply();
+		};
+
+		saveWristband = function(data){
+			$scope.wristband = data.wristbandID;
+			console.log("wristband:" + data.wristbandID);
+			console.log("saved wristband:" + $scope.wristband);
+		};
+		this.init();
+		//set view to input box if wristbandID is null, display wristbandID otherwise
 	});
 
 })();

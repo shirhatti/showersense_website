@@ -14,6 +14,14 @@ head
     script(type='text/javascript', src='js/angular-dashboard.js')
 
   body
+    //- .header
+    //-   .home-menu.pure-menu.pure-menu-open.pure-menu-horizontal.pure-menu-fixed
+    //-     a.pure-menu-heading(href='/') ShowerSense
+    //-     ul
+    //-       li.pure-menu-selected
+    //-         a(href='/') Home
+    //-       li
+    //-         a(href='/auth/facebook') Log In
     include header
     .container-fluid
       .row
@@ -26,8 +34,9 @@ head
               .panel-body
                 p Last shower water usage: {{personal.lastusage}}
                 p Last shower duration: {{personal.lastduration}}
-                p Joined: {{personal.datejoined}}
                 p Number of showers: {{personal.numshowers}}
+                p Joined: {{personal.datejoined}}
+
           .panel.panel-default
             .panel-heading
               h2.panel-title Edit Friend List
@@ -35,12 +44,20 @@ head
             .panel-body(ng-controller='LeaderboardController as addRemove')
               form.form-horizontal.col-sm-12(role='form')
                 .form-group
-                   input.form-control.typeahead(id='name', type='text', placeholder='Find a Friend', data-provide='typeahead')
+                  input.form-control.typeahead(id='name', type='text', placeholder='Find a Friend', data-provide='typeahead')
+                  p
+                  //input#friend.form-control(type='text', placeholder='Friend\'s Name').typeahead
                 .form-group.text-center
                   .col-sm-6
                     button.btn.btn-success.btn-block(ng-click='addRemove.addFriend()') Add
                   .col-sm-6
                     button.btn.btn-danger.btn-block(ng-click='addRemove.removeFriend()') Remove
+          .panel.panel-default
+            .panel-heading
+              h2.panel-title Wristband
+            .panel-body(ng-controller='WristbandController as wbcontrol')
+              p wrist: {{wristband}}
+              input.form-control(id='wristband', type='text', placeholder='Wristband ID')
         .col-sm-8
           section(ng-controller='TabController as panel')
             .panel.panel-default
@@ -50,7 +67,6 @@ head
                 | {{panel.usagetotal}}
                 #usageChart
                   script(type='text/javascript', src='js/usagechartinit.js')
-                 
                 ul.nav.nav-pills
                   li(ng-class='{ active: panel.isSet(1)}')
                     a(href='', ng-click='panel.setTab(1)') Week
@@ -66,3 +82,5 @@ head
                 #leaderChart
                   script(type='text/javascript', src='js/leaderchartinit.js')
   include footer
+  script(src='http://yui.yahooapis.com/3.14.1/build/yui/yui.js')
+  script(type='text/javascript', src = 'js/invite.js')

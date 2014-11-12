@@ -7,6 +7,10 @@ var usageChart = c3.generate({
     axis: {
         x: {
             label: 'Day'
+            // ,
+            // tick:{
+            //     format: function (x) {return x.getDay(); }
+            // }
         },
         y: {
             label: 'Gallons'

@@ -12,10 +12,11 @@ module.exports = passport.use(new FacebookStrategy({
   function(accessToken, refreshToken, profile, done) {
   User.findOne({ oauthID: profile.id }, function(err, user) {
     console.log("HERE");
-    if(err) { 
+    if(err) {
+      console.log("Error");
       console.log(err);
-    }
-    if (!err && user != null) {
+    } else if (user != null) {
+      console.log("user already exists ...");
       user.accessToken = accessToken;
       user.refreshToken = refreshToken;
       user.save(function(err) {
@@ -28,13 +29,14 @@ module.exports = passport.use(new FacebookStrategy({
       });
       done(null, user);
     } else {
-      var user = new User({
+      console.log("creating user ...");
+      user = new User({
         oauthID: profile.id,
         name: profile.displayName,
         created: Date.now(),
         accessToken: accessToken,
         refreshToken: refreshToken,
-        wristbandId: null //TODO: find out how to display this
+        wristbandID: null
 
       });
       user.save(function(err) {

@@ -89,12 +89,12 @@ app.get('/logout', function(req, res){
 app.get('/api/friends', function(req, res){
   User.findById(req.session.passport.user, function(err, userzz) {
     if(err) {
-      res.send("Unauthorized", 401);
+      res.send('Unauthorized', 401);
       console.log(err); 
     } else {
       graph.setAccessToken(userzz.accessToken);
       fb_logged_in = true;
-      query = "SELECT uid,username,name, is_app_user FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user=1"
+      query = 'SELECT uid,username,name, is_app_user FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user=1'
       graph.fql(query, function(err, res2) {
         res.send(res2);
       });
@@ -102,22 +102,53 @@ app.get('/api/friends', function(req, res){
   });
 });
 
-app.get('/api/getwristband', function(req,res){
+app.get('/api/wristband', function(req,res){
   User.findById(req.session.passport.user, function(err, userzz) {
     if (err) {
       //TODO: provide error message
       console.log(err);
-      res.send('error', 401);
+      res.send('Unauthorized', 401);
     } 
     if ( !err && userzz != null ){
       console.log(userzz.name);
-      res.send(userzz.wristbandId);
+      res.json({wristbandID: userzz.wristbandID});
+      //res.send(userzz.wristbandID);
     } else {
-    console.log('noo');
-    res.send('nothing happened');
-  }
+    console.log(err);
+    res.send('Unauthorized', 401);
+    }
 
   });
+});
+
+app.post('/api/wristband', function(req, res){
+  User.findById(req.session.passport.user, function(err, userzz) {
+    if(err) {
+      res.send("Unauthorized", 401);
+      console.log(err); 
+    }
+    if (!err && userzz!= null) {
+      console.log(req.body.wristbandID);
+      if (req.body.wristbandID != null) {
+        userzz.wristbandID = req.body.wristbandID;
+        userzz.save(function(err) {
+          if(err) { 
+            console.log(err); 
+          } else {
+            console.log("saving user ...");
+          };
+        });
+        res.redirect('/dashboard');
+      }
+      else {
+        res.send("Request badly formed", 400);
+      }
+    } else {
+      res.send("Unauthorized", 401);
+      console.log(err); 
+    }
+  });
+  
 });
 
 app.post('/api/shower', function(req, res){
@@ -133,7 +164,7 @@ app.post('/api/shower', function(req, res){
     if(err) { 
       console.log(err); 
     } else {
-      console.log("saving shower ...");
+      console.log('saving shower ...');
     };
   });
 });
