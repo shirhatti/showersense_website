@@ -49,8 +49,6 @@ passport.deserializeUser(function(id, done) {
 // routes
 app.get('/', routes.index);
 app.get('/dashboard', routes.dashboard);
-app.get('/invite', routes.invite);
-app.get('/friends', routes.friends);
 app.get('/account', ensureAuthenticated, function(req, res){
   User.findById(req.session.passport.user, function(err, user) {
     if(err) { 
@@ -75,7 +73,7 @@ app.get('/auth/facebook/callback',
       if(err) { 
         console.log(err);
       }
-      res.redirect('/account#getStarted');
+      res.redirect('/dashboard');
     });
   }
 );
