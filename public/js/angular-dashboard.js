@@ -14,21 +14,22 @@
 	app.controller('PersonalController', ['$scope', '$http', 'stat', function($scope, $http, stat){
 		//TODO: find what data we need and initialize it here
 		//this.data = some mongo query
-		this.lastusage;
-		this.lastduration
-		this.datejoined;
-		this.numshowers;
+		$scope.lastusage;
+		$scope.lastduration
+		$scope.datejoined;
+		$scope.numshowers;
 		this.init = function(){
 			var url = 'http://demo7576728.mockable.io/personal';
-			stat.getStats(function(response){
-				$scope.profile = response;
-				// console.log('$scope.profile = ' +Object.keys($scope.profile))
-				console.log(response); //successfully got response here, TODO: BUT HOW TO USE IT
-			});
-			// this.lastusage = $scope.profile.lastShowerUsage;
-			// this.lastduration = data.lastShowerDuration;
-			// this.datejoined = data.created;
-			// this.numshowers = data.numShowers;
+			$http.get(url).success(init);
+		};
+
+		init = function(data){
+			
+				$scope.lastusage = data.lastShowerUsage;
+				$scope.lastduration = data.lastShowerDuration;
+				$scope.datejoined = data.created;
+				$scope.numshowers = data.numShowers;
+				console.log(data); //successfully got response here, TODO: BUT HOW TO USE IT
 		};
 
 		this.init();

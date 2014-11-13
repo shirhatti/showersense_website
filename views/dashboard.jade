@@ -24,10 +24,10 @@ head
               .panel-heading
                 h2.panel-title Personal Stats
               .panel-body
-                p Last shower water usage: {{personal.lastusage}}
-                p Last shower duration: {{personal.lastduration}}
-                p Number of showers: {{personal.numshowers}}
-                p Joined: {{personal.datejoined}}
+                p Last shower water usage: {{lastusage | date:'mediumDate'}}
+                p Last shower duration: {{lastduration}}
+                p Number of showers: {{numshowers}}
+                p Joined: {{datejoined | date:'mediumDate' }}
 
           .panel.panel-default
             .panel-heading
