@@ -56,8 +56,11 @@ head
             .panel-heading
               h2.panel-title Wristband
             .panel-body(ng-controller='WristbandController as wbcontrol')
-              p wrist: {{wristband}}
-              input.form-control(id='wristband', type='text', placeholder='Wristband ID')
+              p(ng-show="wristband") wrist: {{wristband}}
+              form(ng-show="!wristband", ng-submit='postWristband()')
+                div(ng-form='wristbandForm')
+                  input.form-control(id='wbForm', ng-model='inputID', type='number', placeholder='Wristband ID')
+                  input(type='submit', id='submit', value='Submit')
         .col-sm-8
           section(ng-controller='TabController as panel')
             .panel.panel-default

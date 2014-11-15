@@ -99,6 +99,7 @@
 
 	app.controller('WristbandController', function($http, $scope){
 		$scope.wristband;
+		$scope.inputID;
 		this.init = function(){
 			$http.get('../api/wristband').success(saveWristband);
 			//$scope.$apply();
@@ -106,8 +107,12 @@
 
 		saveWristband = function(data){
 			$scope.wristband = data.wristbandID;
-			console.log("wristband:" + data.wristbandID);
 			console.log("saved wristband:" + $scope.wristband);
+		};
+
+		$scope.postWristband = function(){
+			console.log($scope.inputID);
+			$http.post('/api/wristband', '{ "wristbandID":' + $scope.inputID + '}').success();
 		};
 		this.init();
 		//set view to input box if wristbandID is null, display wristbandID otherwise
