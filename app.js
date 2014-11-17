@@ -40,7 +40,7 @@ passport.serializeUser(function(user, done) {
 });
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user){
-        console.log(user);
+        //console.log(user);
         if(!err) done(null, user);
         else done(err, null);
     })
@@ -108,9 +108,7 @@ app.get('/api/wristband', function(req,res){
       res.send('Unauthorized', 401);
     } 
     if ( !err && userzz != null ){
-      console.log(userzz.name);
       res.json({wristbandID: userzz.wristbandID});
-      //res.send(userzz.wristbandID);
     } else {
     console.log(err);
     res.send('Unauthorized', 401);
@@ -161,7 +159,7 @@ app.get('/api/shower/month', function(req, res) {
       lastMonth.setDate(today.getDate() - 30);
 
       Shower.aggregate([
-          { $match: { wristbandID: 4 , date: { $gte: lastMonth, $lt: today} }},
+          { $match: { wristbandID: parseInt(userzz.wristbandID) , date: { $gte: lastMonth, $lt: today} }},
           { $group: {
               _id : { year: { $year: "$date" }, month: { $month: "$date" }, day: { $dayOfMonth: "$date" } },
               total: { $sum: "$waterConsumed" },
@@ -197,7 +195,7 @@ app.get('/api/shower/week', function(req, res) {
       lastWeek.setDate(today.getDate() - 7);
 
       Shower.aggregate([
-          { $match: { wristbandID: 4 , date: { $gte: lastWeek, $lt: today} }},
+          { $match: { wristbandID: parseInt(userzz.wristbandID) , date: { $gte: lastWeek, $lt: today} }},
           { $group: {
               _id : { year: { $year: "$date" }, month: { $month: "$date" }, day: { $dayOfMonth: "$date" } },
               total: { $sum: "$waterConsumed" },
@@ -214,6 +212,71 @@ app.get('/api/shower/week', function(req, res) {
         }
         res.send(showers);
       });
+    } else {
+      res.send("Unauthorized", 401);
+      console.log(err); 
+    }
+  })
+})
+
+app.get('/api/shower/friends/week', function(req, res) {
+  User.findById(req.session.passport.user, function(err, userzz) {
+    if(err) {
+      res.send("Unauthorized", 401);
+      console.log(err); 
+    }
+    if (!err && userzz!= null) {
+      var today = new Date();
+      var lastWeek = new Date();
+      lastWeek.setDate(today.getDate() - 7);
+
+      graph.setAccessToken(userzz.accessToken);
+      fb_logged_in = true;
+      query = 'SELECT uid,username,name, is_app_user FROM user WHERE uid IN(SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user=1'
+      graph.fql(query, function(err, res2) {
+        var list_uid = [];
+        for (var index in res2.data) {
+          list_uid.push(parseInt(res2.data[index].uid));
+        }
+        var list_wristband = []
+        var map = new Array();
+        User.find({ oauthID: {$in: list_uid}}, function (err, friends) {
+          for (var index in friends) {
+            var temp = parseInt(friends[index].wristbandID);
+            if (!isNaN(temp)){
+              map[friends[index].wristbandID] = friends[index].name;
+              list_wristband.push(temp);
+            }
+          }
+          map[parseInt(userzz.wristbandID)] = userzz.name;
+          list_wristband.push(parseInt(userzz.wristbandID));
+          Shower.aggregate([
+              { $match: { wristbandID: {$in: list_wristband} , date: { $gte: lastWeek, $lt: today} }},
+              { $group: {
+                  _id : { wristbandID: "$wristbandID" },
+                  total: { $sum: "$waterConsumed" },
+                  duration: { $sum: "$duration" },
+                  count: { $sum: 1}
+              }},
+              { $sort: { _id: -1 }}//,
+              // { $limit: 30 }
+
+            ], function (err, showers) {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            for (index in showers) {
+              showers[index]._id = map[showers[index]._id.wristbandID];
+              showers[index].average = showers[index].total / showers[index].count;
+            }
+            res.send(showers);
+          });
+        });
+
+      });
+
+
     } else {
       res.send("Unauthorized", 401);
       console.log(err); 
