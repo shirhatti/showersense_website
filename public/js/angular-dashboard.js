@@ -42,20 +42,23 @@
 			switch(num){
 				case 1:
 					this.period = "this week";
-					url = 'http://demo7576728.mockable.io/week1';
+					url = '/api/shower/week';
+					// url = 'http://demo7576728.mockable.io/week1';
 					break;
 				case 2:
 					this.period = "this month";
-					url = 'http://demo7576728.mockable.io/month1';
+					// url = 'http://demo7576728.mockable.io/month1';
+					url = '/api/shower/month';
 					break;
 			}
 
 			$scope.usage;
-			$http.get(url).success(function(data){
-				usageChart.load({
-					json: data.values
-				});
-				$scope.usage = data.total;
+			$http.get(url).success( function(data){
+				// usageChart.load({
+				// 	json: data.values
+				// });
+				$scope.loadUsage(data);
+				// $scope.usage = data.total;
 			});
 			this.usagetotal = $scope.usage;
 						// $http.get(url).success(loadUsage);
@@ -67,9 +70,15 @@
 		};
 
 		//Refresh chart with new data
-		loadUsage = function(data){
+		$scope.loadUsage = function(data){
+			var chartData = new Array();
+			data.forEach(function(entry) {
+				// console.log("USAGE IS: " + entry.total);
+				chartData.push(entry.total);
+			});
+
 			usageChart.load({
-				json: data.values
+				json: {"Water Usage": chartData}
 			});
 			$scope.usage = data.total;
 		};

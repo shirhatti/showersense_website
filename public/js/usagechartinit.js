@@ -8,6 +8,7 @@ var usageChart = c3.generate({
         x: {
             label: 'Day'
             // ,
+            // type: 'timeseries',
             // tick:{
             //     format: function (x) {return x.getDay(); }
             // }
