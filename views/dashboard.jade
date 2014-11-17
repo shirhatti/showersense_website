@@ -48,7 +48,7 @@ head
             .panel-heading
               h2.panel-title Wristband
             .panel-body(ng-controller='WristbandController as wbcontrol')
-              p(ng-show="wristband") wrist: {{wristband}}
+              p(ng-show="wristband") Wristband ID: {{wristband}}
               form(ng-show="!wristband", ng-submit='postWristband()')
                 div(ng-form='wristbandForm')
                   input.form-control(id='wbForm', ng-model='inputID', type='number', placeholder='Wristband ID')

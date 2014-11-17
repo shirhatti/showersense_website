@@ -6,5 +6,11 @@ var leaderboard = c3.generate({
         },
     axis:{
         rotated:'true',
+        x: {
+        	label: 'Friends'
+        }, 
+        y: {
+        	label: 'Average gallons'
+        }
     }
 });

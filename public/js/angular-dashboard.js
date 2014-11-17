@@ -29,7 +29,6 @@
 				$scope.lastduration = data.lastShowerDuration;
 				$scope.datejoined = data.created;
 				$scope.numshowers = data.numShowers;
-				console.log(data); //successfully got response here, TODO: BUT HOW TO USE IT
 		};
 
 		this.init();
@@ -54,11 +53,19 @@
 
 			$scope.usage;
 			$http.get(url).success( function(data){
-				// usageChart.load({
-				// 	json: data.values
-				// });
-				$scope.loadUsage(data);
-				// $scope.usage = data.total;
+				var d = [];
+				var x = [];
+				var y = [];
+				x.push('x');
+				y.push('Water Usage');
+				for (index in data) {
+					x.push(data[index]._id.year + '-' + data[index]._id.month + '-' + data[index]._id.day);
+					y.push(data[index].total);
+				}
+				d.push(x);
+				d.push(y);
+				console.log(d);
+				$scope.loadUsage(d);
 			});
 			this.usagetotal = $scope.usage;
 						// $http.get(url).success(loadUsage);
@@ -71,15 +78,11 @@
 
 		//Refresh chart with new data
 		$scope.loadUsage = function(data){
-			var chartData = new Array();
-			data.forEach(function(entry) {
-				// console.log("USAGE IS: " + entry.total);
-				chartData.push(entry.total);
-			});
 
 			usageChart.load({
-				json: {"Water Usage": chartData}
-			});
+		        columns: data,
+    		});
+			
 			$scope.usage = data.total;
 		};
 
@@ -120,7 +123,6 @@
 		};
 
 		$scope.postWristband = function(){
-			console.log($scope.inputID);
 			$http.post('/api/wristband', '{ "wristbandID":' + $scope.inputID + '}').success();
 		};
 		this.init();
