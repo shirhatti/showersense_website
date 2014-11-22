@@ -1,17 +1,7 @@
 (function(){
 	var app = angular.module('dashboard', []);
 
-	app.service('stat', function($http){
-		this.getStats = function(callback){
-			var url = 'http://demo7576728.mockable.io/personal';
-			$http.get(url).success(function(response){
-				//console.log('base response = ' +response);
-				callback(response);
-			})
-		}
-	});
-
-	app.controller('PersonalController', ['$scope', '$http', 'stat', function($scope, $http, stat){
+	app.controller('PersonalController', ['$scope', '$http', function($scope, $http, stat){
 		//TODO: find what data we need and initialize it here
 		//this.data = some mongo query
 		$scope.lastusage;
@@ -66,7 +56,7 @@
 				d.push(y);
 				//TODO: if no data, clear graph and show message. else loadUsage(d)
 				// if (data.length != 0)
-				console.log(x.length)
+				// console.log(x.length)
 				$scope.loadUsage(d);
 			});
 			this.usagetotal = $scope.usage;
@@ -92,7 +82,7 @@
 		this.setTab(1);
 	});
 
-	app.controller('LeaderboardController', function($http){
+	app.controller('LeaderboardController', function($http, $scope, $filter){
 		this.addFriend = function(){
 			$http.get(url).success(loadData);
 		};
@@ -100,12 +90,24 @@
 			$http.get(url).success(loadData);
 		};
 		this.initialize = function(){
-			var url = 'http://demo7576728.mockable.io/leaderboard';
-			$http.get(url).success(loadData);
+			// var url = 'http://demo7576728.mockable.io/leaderboard';
+			var url = 'http://localhost:5000/api/shower/friends/week';
+			$http.get(url).success(function(data){
+				var d = [];
+				var slot = [];
+
+				for (friend in data) {
+					slot = [];
+					slot.push(data[friend]._id);
+					slot.push($filter('number')(data[friend].average, 1));
+					d.push(slot);
+				}
+				$scope.loadData(d);
+			});
 		};
-		loadData = function(data){
+		$scope.loadData = function(data){
 			leaderboard.load({
-				json: data.values
+				columns: data
 			});
 		};
 		this.initialize();
@@ -121,7 +123,6 @@
 
 		saveWristband = function(data){
 			$scope.wristband = data.wristbandID;
-			console.log("saved wristband:" + $scope.wristband);
 		};
 
 		$scope.postWristband = function(){
