@@ -1,13 +1,14 @@
 var leaderboard = c3.generate({
     bindto: '#leaderChart',
     data: {
-            json:{},
-            type:'bar'
-        },
+        json:{},
+        x:'x',
+        type:'bar'
+    },
     axis:{
         rotated:'true',
         x: {
-        	label: 'Friends'
+            type: 'category'
         }, 
         y: {
         	label: 'Average gallons'

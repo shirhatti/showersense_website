@@ -10,10 +10,10 @@
 		$scope.numshowers;
 		this.init = function(){
 			var url = 'http://demo7576728.mockable.io/personal';
-			$http.get(url).success(init);
+			$http.get(url).success($scope.init);
 		};
 
-		init = function(data){
+		$scope.init = function(data){
 			
 				$scope.lastusage = data.lastShowerUsage;
 				$scope.lastduration = data.lastShowerDuration;
@@ -94,14 +94,17 @@
 			var url = 'http://localhost:5000/api/shower/friends/week';
 			$http.get(url).success(function(data){
 				var d = [];
-				var slot = [];
-
+				var friends = [];
+				var usage = [];
+				friends.push('x');
+				usage.push("Average Water Usage");
 				for (friend in data) {
-					slot = [];
-					slot.push(data[friend]._id);
-					slot.push($filter('number')(data[friend].average, 1));
-					d.push(slot);
+					friends.push(data[friend]._id);
+					usage.push($filter('number')(data[friend].average, 1));
 				}
+				d.push(friends);
+				d.push(usage);
+				console.log(d);
 				$scope.loadData(d);
 			});
 		};

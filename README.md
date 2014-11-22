@@ -4,7 +4,8 @@ This page will be update soon
 
 #Open Issues
 
-C3js graphs - doesn't update when the new data is empty.
+C3js graphs - doesn't update when the retrieved data is empty.
+Friend Leaderboard graph - may become cluttered with too many friends. Implement chart.unload() to remove from graph, and chart.load() to add back. chart.load() may require making API call to retrieve friend data.
 
 # License
 
