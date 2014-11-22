@@ -64,7 +64,9 @@
 				}
 				d.push(x);
 				d.push(y);
-				console.log(d);
+				//TODO: if no data, clear graph and show message. else loadUsage(d)
+				// if (data.length != 0)
+				console.log(x.length)
 				$scope.loadUsage(d);
 			});
 			this.usagetotal = $scope.usage;
