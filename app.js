@@ -166,7 +166,7 @@ app.get('/api/shower/month', function(req, res) {
               duration: { $sum: "$duration" },
               count: { $sum: 1}
           }},
-          { $sort: { _id: -1 }}//,
+          { $sort: { _id: 1 }}//,
           // { $limit: 30 }
 
         ], function (err, showers) {
@@ -202,7 +202,7 @@ app.get('/api/shower/week', function(req, res) {
               duration: { $sum: "$duration" },
               count: { $sum: 1}
           }},
-          { $sort: { _id: -1 }}//,
+          { $sort: { _id: 1 }}//,
           // { $limit: 30 }
 
         ], function (err, showers) {

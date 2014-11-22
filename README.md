@@ -2,6 +2,10 @@
 
 This page will be update soon
 
+#Open Issues
+
+C3js graphs - doesn't update when the new data is empty.
+
 # License
 
 The MIT License (MIT)

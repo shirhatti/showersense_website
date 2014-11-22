@@ -27,7 +27,7 @@ module.exports = passport.use(new FacebookStrategy({
           done(null, user);
         };
       });
-      done(null, user);
+      // done(null, user);
     } else {
       console.log("creating user ...");
       user = new User({
@@ -43,7 +43,7 @@ module.exports = passport.use(new FacebookStrategy({
         if(err) { 
           console.log(err); 
         } else {
-          console.log("saving user ...");
+          console.log("saving user ...2");
           done(null, user);
         };
       });
