@@ -117,6 +117,33 @@ app.get('/api/wristband', function(req,res){
   });
 });
 
+app.get('/api/me', function(req,res){
+  User.findById(req.session.passport.user, function(err, userzz) {
+    if (err) {
+      //TODO: provide error message
+      console.log(err);
+      res.send('Unauthorized', 401);
+    } 
+    if ( !err && userzz != null ){
+
+      Shower.find({wristbandID: 1})
+        // .where('wristbandID').equals(1)
+        .sort('-date')
+        .select('wristbandID date')
+        .limit(10)
+        .exec(function (err, showers) {
+            console.log(showers);
+        });
+
+      res.json({user: userzz});
+    } else {
+    console.log(err);
+    res.send('Unauthorized', 401);
+    }
+
+  });
+});
+
 app.post('/api/wristband', function(req, res){
   User.findById(req.session.passport.user, function(err, userzz) {
     if(err) {
@@ -299,7 +326,7 @@ app.get('/api/shower/friends/week', function(req, res) {
 //     } else {
 //       console.log('saving shower ...');
 //     };
-//   });
+//   });~~
 // });
 
 // port
