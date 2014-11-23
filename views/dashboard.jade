@@ -24,25 +24,25 @@ head
                 h2.panel-title Personal Stats
               .panel-body
                 p Last shower: {{lastusage | date:'mediumDate'}}
-                p Last shower duration: {{lastduration}} minutes
+                p Last shower usage: {{lastWaterUsage}} gallons
                 p Number of showers: {{numshowers}}
                 p Joined: {{datejoined | date:'mediumDate' }}
 
-          .panel.panel-default
-            .panel-heading
-              h2.panel-title Edit Friend List
+          //- .panel.panel-default
+          //-   .panel-heading
+          //-     h2.panel-title Edit Friend List
             //end panel-heading 
-            .panel-body(ng-controller='LeaderboardController as addRemove')
-              form.form-horizontal.col-sm-12(role='form')
-                .form-group
-                  input.form-control.typeahead(id='name', type='text', placeholder='Find a Friend', data-provide='typeahead')
-                  p
-                  //input#friend.form-control(type='text', placeholder='Friend\'s Name').typeahead
-                .form-group.text-center
-                  .col-sm-6
-                    button.btn.btn-success.btn-block(ng-click='addRemove.addFriend()') Add
-                  .col-sm-6
-                    button.btn.btn-danger.btn-block(ng-click='addRemove.removeFriend()') Remove
+            //- .panel-body(ng-controller='LeaderboardController as addRemove')
+            //-   form.form-horizontal.col-sm-12(role='form')
+            //-     .form-group
+            //-       input.form-control.typeahead(id='name', type='text', placeholder='Find a Friend', data-provide='typeahead')
+            //-       p
+            //-       //input#friend.form-control(type='text', placeholder='Friend\'s Name').typeahead
+            //-     .form-group.text-center
+            //-       .col-sm-6
+            //-         button.btn.btn-success.btn-block(ng-click='addRemove.addFriend()') Add
+            //-       .col-sm-6
+            //-         button.btn.btn-danger.btn-block(ng-click='addRemove.removeFriend()') Remove
           .panel.panel-default
             .panel-heading
               h2.panel-title Wristband
