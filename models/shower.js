@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 // create a user model
 var Shower = mongoose.model('Shower', {
-    wristbandID: String,
+    wristbandID: Number,
     timeStamp: Date,
     duration: Number,
     volume: Number

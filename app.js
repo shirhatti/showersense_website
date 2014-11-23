@@ -125,17 +125,21 @@ app.get('/api/me', function(req,res){
       res.send('Unauthorized', 401);
     } 
     if ( !err && userzz != null ){
-
-      Shower.find({wristbandID: 1})
-        // .where('wristbandID').equals(1)
+      //Date Joined
+      var dateJoined = userzz.created;
+      //Find last shower info
+      Shower.findOne({})
+        .where('wristbandID').equals(parseInt(userzz.wristbandID))
         .sort('-date')
-        .select('wristbandID date')
-        .limit(10)
-        .exec(function (err, showers) {
-            console.log(showers);
-        });
-
-      res.json({user: userzz});
+        .select('wristbandID date duration waterConsumed')
+        .exec(function (err, shower) {
+            //Find total showers
+            Shower.find({wristbandID:parseInt(userzz.wristbandID)})
+            .count()
+            .exec(function(err, count){
+              res.json({user: userzz, count: count, shower: shower});
+            });  
+        });   
     } else {
     console.log(err);
     res.send('Unauthorized', 401);

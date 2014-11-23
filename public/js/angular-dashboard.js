@@ -9,16 +9,18 @@
 		$scope.datejoined;
 		$scope.numshowers;
 		this.init = function(){
-			var url = 'http://demo7576728.mockable.io/personal';
+			// var url = 'http://demo7576728.mockable.io/personal';
+			var url = '/api/me'
 			$http.get(url).success($scope.init);
 		};
 
 		$scope.init = function(data){
 			
-				$scope.lastusage = data.lastShowerUsage;
-				$scope.lastduration = data.lastShowerDuration;
-				$scope.datejoined = data.created;
-				$scope.numshowers = data.numShowers;
+				$scope.lastusage = data.shower.date;
+				$scope.lastduration = data.shower.duration;
+				$scope.lastWaterUsage = data.shower.waterConsumed;
+				$scope.datejoined = data.user.created;
+				$scope.numshowers = data.count;
 		};
 
 		this.init();
@@ -104,7 +106,6 @@
 				}
 				d.push(friends);
 				d.push(usage);
-				console.log(d);
 				$scope.loadData(d);
 			});
 		};
