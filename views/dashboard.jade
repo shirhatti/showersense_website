@@ -23,7 +23,7 @@ head
               .panel-heading
                 h2.panel-title Personal Stats
               .panel-body
-                table.pure-table
+                table.stats(ng-show="wristband")
                   tbody
                     tr
                       td Last shower: 
@@ -41,6 +41,14 @@ head
                       td Member since: 
                       td.value {{datejoined | date:'mediumDate' }}
                     tr 
+                    tr
+                      td Wristband ID:
+                      td.value {{wristband}}
+                form(ng-show="!wristband", ng-submit='postWristband()')
+                  div(ng-form='wristbandForm')
+                    input.form-control(id='wbForm', ng-model='inputID', type='number', placeholder='Wristband ID')
+                    input(type='submit', id='submit', value='Submit')
+
           //- .panel.panel-default
           //-   .panel-heading
           //-     h2.panel-title Edit Friend List
@@ -56,20 +64,17 @@ head
             //-         button.btn.btn-success.btn-block(ng-click='addRemove.addFriend()') Add
             //-       .col-sm-6
             //-         button.btn.btn-danger.btn-block(ng-click='addRemove.removeFriend()') Remove
-          .panel.panel-default
-            .panel-heading
-              h2.panel-title Wristband
-            .panel-body(ng-controller='WristbandController as wbcontrol')
-              table.pure-table(ng-show="wristband") 
-                tbody  
-                  tr
-                    td Wristband ID: 
-                    td.value {{wristband}}
-              form(ng-show="!wristband", ng-submit='postWristband()')
-                div(ng-form='wristbandForm')
-                  input.form-control(id='wbForm', ng-model='inputID', type='number', placeholder='Wristband ID')
-                  input(type='submit', id='submit', value='Submit')
         .col-sm-8
+          section(ng-controller='LeaderboardController as panel')
+            .panel.panel-default
+              .panel-heading
+                h2.panel-title LeaderBoard
+            
+              .panel-body
+                #leaderChart
+                  script(type='text/javascript', src='js/leaderchartinit.js')
+      .row
+        .col-sm-12
           section(ng-controller='TabController as panel')
             .panel.panel-default
               .panel-heading
@@ -82,15 +87,6 @@ head
                   li(ng-class='{ active: panel.isSet(1)}')
                     a(href='', ng-click='panel.setTab(1)') Week
                   li(ng-class='{ active: panel.isSet(2)}')
-                    a(href='', ng-click='panel.setTab(2)') Month
-      .row
-        .col-sm-12          
-          section(ng-controller='LeaderboardController as panel')
-            .panel.panel-default
-              .panel-heading
-                h2.panel-title LeaderBoard
-            
-              .panel-body
-                #leaderChart
-                  script(type='text/javascript', src='js/leaderchartinit.js')
+                    a(href='', ng-click='panel.setTab(2)') Month      
+         
   include footer

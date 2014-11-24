@@ -81,15 +81,12 @@ body {
   color: #000000;  
 }
 
-.pure-table {
-  table-layout: fixed;
+.stats {
+/*  table-layout: fixed;*/
   color: #000000;
   width: 100%;
   border: none; 
-}
-
-.label {
-  /*text-align: left;*/
+  line-height: 64px;
 }
 
 .value {

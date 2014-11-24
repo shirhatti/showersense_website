@@ -6,7 +6,7 @@ var leaderboard = c3.generate({
             type:'bar'
         },
     axis:{
-        rotated:'false',
+        rotated:'true',
         x: { 
             type: 'category',
             label: 'Friends',
@@ -17,6 +17,9 @@ var leaderboard = c3.generate({
             }
         },
         y: { 
+            labels:{
+                format: function (v, id, i) { return "Default Format"; },
+            },
             label: 'Average Gallons',
             tick: {format: d3.format('.2f')}
         }

@@ -2,16 +2,19 @@
 	var app = angular.module('dashboard', []);
 
 	app.controller('PersonalController', ['$scope', '$http', function($scope, $http, stat){
-		//TODO: find what data we need and initialize it here
-		//this.data = some mongo query
+		
 		$scope.lastusage;
 		$scope.lastduration
 		$scope.datejoined;
 		$scope.numshowers;
+		$scope.wristband;
+		$scope.inputID;
+
 		this.init = function(){
 			// var url = 'http://demo7576728.mockable.io/personal';
 			var url = '/api/me'
 			$http.get(url).success($scope.init);
+			$http.get('../api/wristband').success(saveWristband);
 		};
 
 		$scope.init = function(data){
@@ -21,6 +24,14 @@
 				$scope.lastWaterUsage = data.shower.waterConsumed;
 				$scope.datejoined = data.user.created;
 				$scope.numshowers = data.count;
+		};
+
+		$scope.postWristband = function(){
+			$http.post('/api/wristband', '{ "wristbandID":' + $scope.inputID + '}').success();
+		};
+
+		saveWristband = function(data){
+			$scope.wristband = data.wristbandID;
 		};
 
 		this.init();
@@ -114,25 +125,6 @@
 			});
 		};
 		this.initialize();
-	});
-
-	app.controller('WristbandController', function($http, $scope){
-		$scope.wristband;
-		$scope.inputID;
-		this.init = function(){
-			$http.get('../api/wristband').success(saveWristband);
-			//$scope.$apply();
-		};
-
-		saveWristband = function(data){
-			$scope.wristband = data.wristbandID;
-		};
-
-		$scope.postWristband = function(){
-			$http.post('/api/wristband', '{ "wristbandID":' + $scope.inputID + '}').success();
-		};
-		this.init();
-		//set view to input box if wristbandID is null, display wristbandID otherwise
 	});
 
 })();
