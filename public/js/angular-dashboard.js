@@ -93,7 +93,7 @@
 		};
 		this.initialize = function(){
 			// var url = 'http://demo7576728.mockable.io/leaderboard';
-			var url = 'http://localhost:5000/api/shower/friends/week';
+			var url = '../api/shower/friends/week';
 			$http.get(url).success(function(data){
 				var d = [];
 				var friends = [];
