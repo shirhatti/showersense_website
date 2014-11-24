@@ -96,17 +96,16 @@
 			var url = '../api/shower/friends/week';
 			$http.get(url).success(function(data){
 				var d = [];
-				var friends = [];
 				var usage = [];
-				friends.push('x');
 				usage.push("Average Water Usage");
+				d.push(['x', 'Friends']);
 				for (friend in data) {
+					var friends = [];
 					friends.push(data[friend]._id);
-					usage.push($filter('number')(data[friend].average, 1));
+					friends.push($filter('number')(data[friend].average, 1));
+					d.push(friends);
 				}
-				d.push(friends);
-				d.push(usage);
-				$scope.loadData(d);
+				$scope.loadData(d);	
 			});
 		};
 		$scope.loadData = function(data){

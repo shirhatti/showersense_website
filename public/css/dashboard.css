@@ -77,6 +77,25 @@ body {
   margin-top: 0;
 }
 
+.panel-body {
+  color: #000000;  
+}
+
+.pure-table {
+  table-layout: fixed;
+  color: #000000;
+  width: 100%;
+  border: none; 
+}
+
+.label {
+  /*text-align: left;*/
+}
+
+.value {
+  text-align: right;
+  font-weight: bold;
+}
 
 /*
  * Placeholder dashboard ideas

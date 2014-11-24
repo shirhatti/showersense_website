@@ -23,11 +23,24 @@ head
               .panel-heading
                 h2.panel-title Personal Stats
               .panel-body
-                p Last shower: {{lastusage | date:'mediumDate'}}
-                p Last shower usage: {{lastWaterUsage}} gallons
-                p Number of showers: {{numshowers}}
-                p Joined: {{datejoined | date:'mediumDate' }}
-
+                table.pure-table
+                  tbody
+                    tr
+                      td Last shower: 
+                      td.value {{lastusage | date:'mediumDate'}}
+                    tr
+                    tr
+                      td Last shower usage: 
+                      td.value {{lastWaterUsage}} gallons
+                    tr
+                    tr
+                      td Number of showers: 
+                      td.value {{numshowers}}
+                    tr
+                    tr
+                      td Member since: 
+                      td.value {{datejoined | date:'mediumDate' }}
+                    tr 
           //- .panel.panel-default
           //-   .panel-heading
           //-     h2.panel-title Edit Friend List
@@ -47,7 +60,11 @@ head
             .panel-heading
               h2.panel-title Wristband
             .panel-body(ng-controller='WristbandController as wbcontrol')
-              p(ng-show="wristband") Wristband ID: {{wristband}}
+              table.pure-table(ng-show="wristband") 
+                tbody  
+                  tr
+                    td Wristband ID: 
+                    td.value {{wristband}}
               form(ng-show="!wristband", ng-submit='postWristband()')
                 div(ng-form='wristbandForm')
                   input.form-control(id='wbForm', ng-model='inputID', type='number', placeholder='Wristband ID')
@@ -66,7 +83,8 @@ head
                     a(href='', ng-click='panel.setTab(1)') Week
                   li(ng-class='{ active: panel.isSet(2)}')
                     a(href='', ng-click='panel.setTab(2)') Month
-                
+      .row
+        .col-sm-12          
           section(ng-controller='LeaderboardController as panel')
             .panel.panel-default
               .panel-heading
