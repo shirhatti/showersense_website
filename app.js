@@ -259,7 +259,7 @@ app.get('/api/shower/friends/week', function(req, res) {
     if (!err && userzz!= null) {
       var today = new Date();
       var lastWeek = new Date();
-      lastWeek.setDate(today.getDate() - 7);
+      lastWeek.setDate(today.getDate() - 60);
 
       graph.setAccessToken(userzz.accessToken);
       fb_logged_in = true;
